@@ -1,0 +1,64 @@
+/* public/css/profile.css */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-image: url('/img/logo/Soundsystem.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.background {
+    text-align: center;
+    padding: 100px; /* Sesuaikan dengan kebutuhan Anda */
+    animation: fadeIn 1s ease-in-out forwards; /* Animasi fadeIn selama 1 detik */
+}
+
+h1 {
+    font-size: 36px;
+    color: black;
+}
+
+p {
+    color: black;
+}
+
+a.tbl-biru {
+    background: #3f72af;
+    border-radius: 20px;
+    margin-top: 20px;
+    padding: 15px 20px 15px 20px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+a.tbl-biru:hover {
+    background: #fc5185;
+    text-decoration: none;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0; /* Mulai dari 0 opasitas */
+        transform: translateY(-20px); /* Mulai dari atas */
+    }
+    100% {
+        opacity: 1; /* Selesaikan dengan opasitas 1 */
+        transform: translateY(0); /* Selesaikan dengan posisi normal */
+    }
+}
+
+@media screen and (max-width: 1500px) {
+    body{
+        background-image: url('/img/logo/Sound System.png');
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    body{
+        background-image: url('/img/logo/Soundsystem-small.png');
+    }
+}
