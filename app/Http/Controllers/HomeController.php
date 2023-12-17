@@ -15,6 +15,13 @@ class HomeController extends Controller
         return view('admin.home', compact('admins'));
     }
 
+    public function profil()
+    {
+        $admins = Home::select('name', 'email')->get();
+
+        return view('admin.profil', compact('admins'));
+    }
+
     public function home()
     {
         // Jika ingin mengambil informasi pengguna yang sedang login

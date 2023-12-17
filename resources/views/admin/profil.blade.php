@@ -3,25 +3,17 @@
 @section('admincontent')
     <div class="wrapper">
         <div class="kolom animated">
+            @foreach($admins as $admin)
             <h2>Nama :</h2>
             <div class="kotak">
-                <p>Faza Yoga Ardana</p>
-            </div>
-
-            <h2>Alamat :</h2>
-            <div class="kotak">
-                <p>Gang Latar Ireng V No 5 RT 03/02 Bumi, Laweyan, Solo</p>
+                <p>{{ $admin->name }}</p>
             </div>
             
             <h2>Email :</h2>
             <div class="kotak">
-                <p>fazayoga23@gmail.com</p>
+                <p>{{ $admin->email }}</p>
             </div>
-
-            <h2>No Telp :</h2>
-            <div class="kotak">
-                <p>0895397988422</p>
-            </div>
+            @endforeach
             <br><br>
             <a href="{{ asset ('/edit-profil') }}" class="tbl-pink">Edit Profil</a>
         </div>

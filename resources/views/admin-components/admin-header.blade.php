@@ -17,11 +17,7 @@
                         <li><a href="{{ asset('profil') }}">Profil</a></li>
                         <li><a href="{{ asset('sound_systems') }}">Post</a></li>
                         <li><a href="{{ asset('rental') }}">Booked</a></li>
-                        <li><form action="{{ route('logout') }}" method="post">
-                            @csrf
-                            <button type="submit">Logout</button>
-                        </form>
-                        </li>
+                        <li><a href="{{ asset('logout') }}">Login</a></li>
                     </ul>
                 </div>
             </div>

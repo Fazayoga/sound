@@ -78,4 +78,5 @@ Route::post('/register', [AuthController::class, 'register']);
 
 Route::get('/home', [HomeController::class, 'home'])->name('home');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/profil', [HomeController::class, 'profil'])->name('profil');
 //Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
