@@ -16,6 +16,7 @@
                         <li><a href="{{ asset('home') }}">Home</a></li>
                         <li><a href="{{ asset('profil') }}">Profil</a></li>
                         <li><a href="{{ asset('sound_systems') }}">Post</a></li>
+                        <li><a href="{{ asset('testi') }}">Tested</a></li>
                         <li><a href="{{ asset('rental') }}">Booked</a></li>
                         <li><a href="{{ asset('login') }}">Login</a></li>
                     </ul>

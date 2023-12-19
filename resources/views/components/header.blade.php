@@ -14,6 +14,7 @@
                 <div class="menu">
                     <ul>
                         <li><a href="{{ asset('index') }}">Home</a></li>
+                        <li><a href="{{ asset('testimoni') }}">Testimoni</a></li>
                         <li><a href="{{ asset('order') }}">Booking</a></li>
                         <li><a href="#contact">Contact</a></li>
                         <li><a href="{{ asset('login') }}">Login</a></li>

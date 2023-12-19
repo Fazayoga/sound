@@ -1,14 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\RentLogController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SoundSystemController;
 use App\Http\Controllers\RentalController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TestiController;
+use App\Http\Controllers\TestimoniController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +41,6 @@ Route::get('/rental/create', [RentalController::class, 'create'])->name('rental.
 Route::post('/rental/store', [RentalController::class, 'store'])->name('rental.store');
 // Rute untuk menampilkan daftar persewaan (indeks)
 Route::get('/rental', [RentalController::class, 'index'])->name('rental.index');
-
 // Penutup Halaman Pages
 
 // Menampilkan Home
@@ -63,9 +61,19 @@ Route::get('/sound_systems/edit/{id}', [SoundSystemController::class, 'edit'])->
 Route::put('/sound_systems/update/{id}', [SoundSystemController::class, 'update'])->name('admin.update');
 //Route::delete('/sound_systems/destroy/{id}', [SoundSystemController::class, 'destroy'])->name('admin.destroy');
 
-Route::get('/categories', [CategoryController::class, 'index']);
-Route::get('/roles', [RoleController::class, 'index']);
-Route::get('/rent_logs', [RentLogController::class, 'index']);
+// Testimoni
+Route::get('/testi', [TestimoniController::class, 'index'])->name('testi.index');
+Route::delete('/testimoni/{testi}', [TestiController::class, 'destroy'])->name('testi.destroy');
+//Route::get('admin/{id}/confirm-delete', [SoundSystemController::class, 'confirmDelete'])->name('admin.confirm-delete');
+Route::get('/testimoni', [TestiController::class, 'index'])->name('admin.testi');
+Route::get('/testimoni/create', [TestiController::class, 'create'])->name('testi.create');
+//Route::get('/testi/{id}', [TestiController::class, 'show'])->name('testi.show');
+Route::post('/testimoni/store', [TestiController::class, 'store'])->name('testi.store');
+
+// Menmpilkan Sound System
+Route::get('/testimoni/show/{id}', [TestiController::class, 'show'])->name('testi.show');
+Route::get('/testimoni/edit/{id}', [TestiController::class, 'edit'])->name('testi.edit');
+Route::put('/testimoni/update/{id}', [TestiController::class, 'update'])->name('testi.update');
 
 // Login Admin
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
