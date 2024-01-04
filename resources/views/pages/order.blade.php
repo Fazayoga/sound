@@ -4,7 +4,7 @@
     <div class="wrapper">
         <!-- untuk home -->
         <section id="home">
-            <div class="kolom animated"> <!-- Tambahkan kelas 'animated' di sini -->
+            <div class="kolom animated">
                 <p class="deskripsi">Sound System Laweyan</p>
                 <h2>Rental Sound System & Alat Music</h2>
                 <h4>“Low Price, Good Quality”</h4>
