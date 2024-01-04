@@ -1,0 +1,45 @@
+@extends('indexlayout')
+
+@section('admincontent')
+<div class="wrapper">
+    <h1>Edit Sound System</h1>
+
+    <form action="{{ route('rental.update', $rental->id) }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
+
+        <label for="customer_name">Customer Name:</label>
+        <input type="text" name="customer_name" id="customer_name" placeholder="Nama Pelanggan" value="{{ $rental->customer_name }}" required >
+
+        <label for="event_name">Event Name:</label>
+        <input type="text" name="event_name" id="event_name" placeholder="Nama Acara" value="{{ $rental->event_name }}" required >
+        
+        <label for="name_location">Name Location:</label>
+        <input type="text" name="name_location" id="name_location" placeholder="Alamat Lokasi" value="{{ $rental->name_location }}" required >
+        
+        <label for="event_address">Event Address:</label>
+        <input type="text" name="event_address" id="event_address" placeholder="Alamat Lengkap" value="{{ $rental->event_address }}" required >
+
+        <label for="sound_system_id">Sound System:</label>
+        <select name="sound_system_id" id="sound_system_id">
+            @foreach ($soundSystems as $soundSystem)
+                <option value="{{ $soundSystem->id }}">{{ $soundSystem->judul }}</option>
+            @endforeach
+        </select>
+
+        <label for="rental_date">Rental Date:</label>
+        <input type="date" name="rental_date" id="rental_date" value="{{ $rental->rental_date }}" required >
+
+        <label for="rental_start_time">Rental Start Time:</label>
+        <input type="time" name="rental_start_time" id="rental_start_time" value="{{ $rental->rental_start_date }}" required >
+
+        <label for="rental_end_time">Rental End Time:</label>
+        <input type="time" name="rental_end_time" id="rental_end_time" value="{{ $rental->rental_end_date }}" required >
+
+        <label for="deskripsi">Additional Description:</label>
+        <textarea name="deskripsi" id="deskripsi" placeholder="Tambahkan keterangan apa saja yang dibutuhkan" rows="4" value="{{ $rental->deskripsi }}" required></textarea>
+
+        <button type="submit">Update Data Jadwal</button>
+    </form>
+</div>
+@endsection

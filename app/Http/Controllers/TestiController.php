@@ -10,26 +10,25 @@ class TestiController extends Controller
     public function index()
     {
         $testi = Testi::all();
-        return view('admin.testi', compact('testi'));
+        return view('testi.index', compact('testi'));
     }
 
     public function show($id)
     {
         $testi = Testi::findOrFail($id);
-        return view('testi.show-testi', compact('test'));
+        return view('testi.show', compact('testi'));
     }
 
     public function create()
     {
-        return view('testi.create-testi');
+        return view('testi.create');
     }
 
-    
     public function store(Request $request)
     {
         // Validasi data
         $request->validate([
-            'video' => 'required|mimes:mp4,mov,avi,wmv|max:20480', // Sesuaikan ekstensi dan ukuran file video
+            'video' => 'required|mimes:mp4,mov,avi,wmv|max:100000',
             'judul' => 'required|string|max:255',
             'deskripsi' => 'required|string',
         ]);
@@ -45,30 +44,29 @@ class TestiController extends Controller
                 'judul' => $request->judul,
                 'deskripsi' => $request->deskripsi,
             ]);
-        // Redirect atau berikan respons sesuai kebutuhan
-        
-        return redirect()->route('testi.index')->with('success', 'Data berhasil disimpan.');
+
+            return redirect()->route('testi.index')->with('success', 'Testi berhasil disimpan.');
         }
-        
-        return redirect()->back()->with('error', 'Gambar wajib diunggah.');
+
+        return redirect()->back()->with('error', 'Video wajib diunggah.');
     }
 
     public function edit($id)
     {
         $testi = Testi::findOrFail($id);
-        return view('testi.edit-testi', compact('testi'));
+        return view('testi.edit', compact('testi'));
     }
 
     public function update(Request $request, $id)
     {
         // Validasi data inputan jika diperlukan
         $request->validate([
-            'video' => 'required|mimes:mp4,mov,avi,wmv|max:20480', // Sesuaikan ekstensi dan ukuran file video
+            'video' => 'required|mimes:mp4,mov,avi,wmv|max:100000',
             'judul' => 'required|string|max:255',
             'deskripsi' => 'required|string',
         ]);
 
-        // Update sound system
+        // Update testi
         $testi = Testi::findOrFail($id);
 
         if ($request->hasFile('video')) {
@@ -82,8 +80,8 @@ class TestiController extends Controller
             'deskripsi' => $request->input('deskripsi'),
         ]);
 
-        // Redirect to index or show page
-        return redirect()->route('testi.index')->with('success', 'Sound System updated successfully.');
+        // Redirect to index
+        return redirect()->route('testi.index')->with('success', 'Testi berhasil diperbarui.');
     }
 
     public function destroy($id)

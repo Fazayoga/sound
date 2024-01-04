@@ -12,13 +12,14 @@
                     @foreach($testi as $test)
                     <div class="container">
                         <div class="left">
-                            <img src="{{ asset($test->gambar) }}" width="200px">
+                            <video width="320" height="220" controls>
+                                <source src="{{ asset($test->video) }}" type="video/mp4,mov">
+                                Your browser does not support the video tag.
+                            </video>
                         </div>
                         <div class="right">
                             <h3>{{ $test->judul }}</h3>
                             <h4>Deskripsi : <br>{!! nl2br(e($test->deskripsi)) !!}</h4>
-
-                            <p><a href="{{ asset('testi/create') }}" class="tbl-biru">Booking Now</a></p>
                         </div>
                     </div>
                     @endforeach

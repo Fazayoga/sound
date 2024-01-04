@@ -4,7 +4,7 @@
     <div class="wrapper">
         <h1>Masukkan Testimoni</h1>
 
-        <a href="{{ route('admin.create') }}">Tambah Testimoni</a>
+        <a href="{{ route('testi.create') }}">Tambah Testimoni</a>
 
         @if(session('success'))
             <div style="color: green;">{{ session('success') }}</div>
@@ -15,11 +15,13 @@
                 <th>Video</th>
                 <th>Judul</th>
                 <th>Deskripsi</th>
+                <th>Aksi</th>
             </tr>
             @forelse($testi as $test)
             <tr>
-                <td><video width="320" height="240" controls>
-                        <source src="{{ asset($testi->video) }}" type="video/mp4">
+                <td>
+                    <video width="320" height="220" controls>
+                        <source src="{{ asset($test->video) }}" type="video/mp4,mov">
                         Your browser does not support the video tag.
                     </video>
                 </td>

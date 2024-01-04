@@ -26,7 +26,7 @@ body {
 }
 
 .wrapper {
-    width: 1125px;
+    width: 1225px;
     height: inherit;
     margin: auto;
     position: relative;
@@ -94,6 +94,45 @@ nav ul li a:hover {
     margin: 0 auto;
     padding: auto;
 }   
+
+.menu ul {
+    list-style: none;
+    display: flex;
+}
+
+.menu ul li {
+    margin-right: 0px;
+}
+
+.menu ul li a {
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+    transition: color 0.3s ease;
+}
+
+/* Style for the Logout button */
+.menu ul li form {
+    margin: auto;
+    padding: 0;
+    display: flex;
+    border: none;
+}
+
+.menu ul li form button {
+    background-color: transparent;
+    border: none;
+    color: black;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 20px;
+    transition: color 0.3s ease;
+    margin-top: 19px;
+}
+
+.menu ul li form button:hover {
+    text-decoration: underline;
+}
 
 .logo {
     width: 100%;

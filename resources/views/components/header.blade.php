@@ -14,10 +14,23 @@
                 <div class="menu">
                     <ul>
                         <li><a href="{{ asset('index') }}">Home</a></li>
-                        <li><a href="{{ asset('testimoni') }}">Testimoni</a></li>
+                        <!-- <li><a href="{{ asset('testimoni') }}">Testi</a></li> -->
                         <li><a href="{{ asset('order') }}">Booking</a></li>
+                        <li><a href="{{ asset('jadwal') }}">Schedule</a></li>
                         <li><a href="#contact">Contact</a></li>
-                        <li><a href="{{ asset('login') }}">Login</a></li>
+                        <li><a href="{{ asset('akun') }}">Profil</a></li>
+                        @auth('web')
+                            <!-- Tampilan untuk pengguna yang sudah login -->
+                            <li>
+                                <form method="POST" action="{{ route('logout-user') }}">
+                                    @csrf
+                                    <button type="submit">Logout</button>
+                                </form>
+                            </li>
+                        @else
+                            <!-- Tampilan untuk pengguna yang belum login -->
+                            <li><a href="{{ asset('login') }}">Login</a></li>
+                        @endauth
                     </ul>
                 </div>
             </div>

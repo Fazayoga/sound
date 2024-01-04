@@ -10,7 +10,7 @@
     <div class="background">
         <h1>Selamat Datang di Fazcho Sound System</h1>
         <p>Ini adalah halaman utama kami. Selamat datang!</p><br>
-        <p><a href="{{ asset('index') }}" class="tbl-biru">Klik Selengkapnya</a></p>
+        <p><a href="{{ asset('index') }}" class="tbl-biru">Click Here</a></p>
     </div>
 </body>
 </html>

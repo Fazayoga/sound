@@ -2,8 +2,8 @@
 
 @section('admincontent')
 <div class="wrapper">
-    @foreach($admins as $admin)
-    <h2>Selamat Datang, {{ $admin->name }} !</h2>
-    @endforeach
+    @auth('admin')
+        <h2>Selamat Datang, {{ auth('admin')->user()->name }}!</h2>
+    @endauth
 </div>
 @endsection

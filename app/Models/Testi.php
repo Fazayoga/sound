@@ -9,6 +9,6 @@ class Testi extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['gambar', 'judul', 'deskripsi'];
+    protected $fillable = ['video', 'judul', 'deskripsi'];
     protected $table = 'testi';
 }

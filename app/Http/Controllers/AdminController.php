@@ -5,28 +5,37 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
-    public function showLoginForm()
+    public function edit()
     {
-        return view('access-admin.login');
+        return view('admin.edit-profil');
     }
 
-    public function login(Request $request)
+    public function profil()
     {
-        $credentials = $request->only('email', 'password');
+        return view('admin.profil');
+    }
 
-        if (Auth::attempt($credentials)) {
-            return redirect()->route('admin.home');
+    public function updateProfile(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:admins,email,' . auth('admin')->user()->id,
+            'password' => 'nullable|min:6|confirmed',
+        ]);
+
+        $admin = Admin::find(auth('admin')->user()->id);
+
+        if (!$admin) {
+            // Handle the case where the admin user is not found
+            return redirect()->route('admin.profil')->with('error', 'Admin user not found.');
         }
 
-        return back()->withErrors(['email' => 'Invalid credentials']);
-    }
+        $admin->saveProfile($request->name, $request->email, $request->password);
 
-    public function logout()
-    {
-        Auth::logout();
-        return redirect()->route('access-admin.login'); // Fix the route name here
+        return redirect()->route('admin.profil')->with('success', 'Profil berhasil diperbarui.');
     }
 }

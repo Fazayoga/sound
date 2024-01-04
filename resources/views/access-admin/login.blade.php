@@ -55,28 +55,18 @@
             <div style="color: green;">{{ session('success') }}</div>
         @endif
 
-        <form method="POST" action="/login">
+        <form method="POST" action="{{ url('/login-admin') }}">
             @csrf
-
-            @if ($errors->any())
-                <div style="color: red;">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-            <label for="email">Email:</label>
+        
+            <label for="email">Email</label>
             <input type="email" name="email" required>
-            
-            <label for="password">Password:</label>
-            <input type="password" name="password" required>
+        
+            <label for="password">Password</label>
+            <input type="password" name="password" required>        
             
             <button type="submit">Login</button>
             
-            <p>Dont have account? <a href="{{ url('/register') }}">Register Now</a></p>
+            <p>Dont have account? <a href="{{ url('/register-admin') }}">Register Now</a></p>
         </form>
     </div>
 </body>

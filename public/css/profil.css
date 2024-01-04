@@ -40,6 +40,21 @@ a.tbl-biru:hover {
     text-decoration: none;
 }
 
+a.tbl-pink {
+    background: #fc5185;
+    border-radius: 20px;
+    margin-top: 20px;
+    padding: 15px 20px 15px 20px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+a.tbl-pink:hover {
+    background: #3498db;
+    text-decoration: none;
+}
+
 @keyframes fadeIn {
     0% {
         opacity: 0; /* Mulai dari 0 opasitas */

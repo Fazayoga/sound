@@ -3,17 +3,17 @@
 @section('admincontent')
     <div class="wrapper">
         <div class="kolom animated">
-            @foreach($admins as $admin)
+            @auth('admin')
             <h2>Nama :</h2>
             <div class="kotak">
-                <p>{{ $admin->name }}</p>
+                <p>{{ auth('admin')->user()->name }}</p>
             </div>
             
             <h2>Email :</h2>
             <div class="kotak">
-                <p>{{ $admin->email }}</p>
+                <p>{{ auth('admin')->user()->email }}</p>
             </div>
-            @endforeach
+            @endauth
             <br><br>
             <a href="{{ asset ('/edit-profil') }}" class="tbl-pink">Edit Profil</a>
         </div>

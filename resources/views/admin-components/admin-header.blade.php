@@ -16,9 +16,20 @@
                         <li><a href="{{ asset('home') }}">Home</a></li>
                         <li><a href="{{ asset('profil') }}">Profil</a></li>
                         <li><a href="{{ asset('sound_systems') }}">Post</a></li>
-                        <li><a href="{{ asset('testi') }}">Tested</a></li>
+                        <!-- <li><a href="{{ asset('testi') }}">Tested</a></li> -->
                         <li><a href="{{ asset('rental') }}">Booked</a></li>
-                        <li><a href="{{ asset('login') }}">Login</a></li>
+                        @auth('admin')
+                            <!-- Tampilan untuk pengguna yang sudah login -->
+                            <li>
+                                <form method="POST" action="{{ route('logout-admin') }}">
+                                    @csrf
+                                    <button type="submit">Logout</button>
+                                </form>
+                            </li>
+                        @else
+                            <!-- Tampilan untuk pengguna yang belum login -->
+                            <li><a href="{{ asset('login') }}">Login</a></li>
+                        @endauth
                     </ul>
                 </div>
             </div>

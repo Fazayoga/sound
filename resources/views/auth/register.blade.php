@@ -51,20 +51,37 @@
 </head>
 <body>
     <div class="kolom animated">
-        <form method="POST" action="{{ url('/register-admin') }}">
+        <h2>Register</h2>
+
+        @if($errors->any())
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
+
+        <form action="{{ url('/register') }}" method="post">
             @csrf
-        
-            <label for="name">Name</label>
+            <label for="name">Nama:</label>
             <input type="text" name="name" required>
-        
-            <label for="email">Email</label>
-            <input type="email" name="email" required>
-        
-            <label for="password">Password</label>
+            <br>
+            <label for="email">Email:</label>
+            <input type="text" name="email" required>
+            <br>
+            <label for="password">Password:</label>
             <input type="password" name="password" required>
-        
+            <br>
+            <label for="user_type">User Type:</label>
+            <select name="user_type" required>
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+            </select>
+            <br> <br>
             <button type="submit">Register</button>
+            <p>Already have an account? <a href="{{ url('/login') }}">Login here</a></p>
         </form>
+
     </div>
 </body>
 </html>

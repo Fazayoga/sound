@@ -9,8 +9,7 @@ class TestimoniController extends Controller
 {
     public function index()
     {
-        $testi = Testi::select('video', 'judul', 'deskripsi')->get();
-
-        return view('testi.index', compact('testi'));
+        $testi = Testi::all();
+        return view('admin.testi', compact('testi'));
     }
 }

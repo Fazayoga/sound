@@ -1,31 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\SoundSystemController;
-use App\Http\Controllers\RentalController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TestiController;
+use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\RentalController;
 use App\Http\Controllers\TestimoniController;
+use App\Http\Controllers\SoundSystemController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-// Halaman Pages
 Route::get('/', function () {
     return view('pages.utama');
-});
-
-Route::get('/index', function () {
-    return view('pages.index');
 });
 
 Route::get('/about', function () {
@@ -34,57 +22,73 @@ Route::get('/about', function () {
 
 Route::get('/order', [OrderController::class, 'index'])->name('pages.order');
 
+// Jadwal
+Route::get('/jadwal', [JadwalController::class, 'index'])->name('pages.jadwal');
+
 // RENTAL
-// Rute untuk menampilkan formulir persewaan
-Route::get('/rental/create', [RentalController::class, 'create'])->name('rental.create');
-// Rute untuk menyimpan persewaan
-Route::post('/rental/store', [RentalController::class, 'store'])->name('rental.store');
-// Rute untuk menampilkan daftar persewaan (indeks)
+Route::resource('rental', RentalController::class);
 Route::get('/rental', [RentalController::class, 'index'])->name('rental.index');
-// Penutup Halaman Pages
+Route::get('/rental/{id}', [RentalController::class, 'show'])->name('rental.show');
+Route::post('/rental/store', [RentalController::class, 'store'])->name('rental.store');
+Route::get('/rental/create', [RentalController::class, 'create'])->name('rental.create');
+Route::get('/rentals/edit/{id}', [RentalController::class, 'edit'])->name('rental.edit');
+Route::put('/rentals/rental/{id}', [RentalController::class, 'update'])->name('rental.update');
+Route::delete('/rentals/{rental}', [RentalController::class, 'destroy'])->name('rental.destroy');
+Route::put('/rental/{id}/complete', [RentalController::class, 'complete'])->name('rental.complete');
+Route::get('/rental/konfirmasi', [RentalController::class, 'konfirmasi'])->name('rental.konfirmasi');
 
-// Menampilkan Home
-Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
-
+// Sound System
 Route::resource('admin', SoundSystemController::class);
 Route::delete('/sound-systems/{sound_system}', [SoundSystemController::class, 'destroy'])->name('sound-systems.destroy');
-//Route::get('admin/{id}/confirm-delete', [SoundSystemController::class, 'confirmDelete'])->name('admin.confirm-delete');
-
 Route::get('/sound_systems', [SoundSystemController::class, 'index'])->name('admin.index');
 Route::get('/sound_systems/create', [SoundSystemController::class, 'create'])->name('admin.create');
-
-//Route::get('/sound_systems/{id}', [SoundSystemController::class, 'show'])->name('admin.show');
 Route::post('/sound_systems/store', [SoundSystemController::class, 'store'])->name('admin.store');
-
 Route::get('/sound_systems/show/{id}', [SoundSystemController::class, 'show'])->name('admin.show');
 Route::get('/sound_systems/edit/{id}', [SoundSystemController::class, 'edit'])->name('admin.edit');
 Route::put('/sound_systems/update/{id}', [SoundSystemController::class, 'update'])->name('admin.update');
-//Route::delete('/sound_systems/destroy/{id}', [SoundSystemController::class, 'destroy'])->name('admin.destroy');
+
+// Admin Routes
+Route::resource('admin', SoundSystemController::class)->except('show');
+Route::get('/admin/testimoni', [TestimoniController::class, 'index'])->name('admin.testi');
 
 // Testimoni
-Route::get('/testi', [TestimoniController::class, 'index'])->name('testi.index');
-Route::delete('/testimoni/{testi}', [TestiController::class, 'destroy'])->name('testi.destroy');
-//Route::get('admin/{id}/confirm-delete', [SoundSystemController::class, 'confirmDelete'])->name('admin.confirm-delete');
-Route::get('/testimoni', [TestiController::class, 'index'])->name('admin.testi');
-Route::get('/testimoni/create', [TestiController::class, 'create'])->name('testi.create');
-//Route::get('/testi/{id}', [TestiController::class, 'show'])->name('testi.show');
-Route::post('/testimoni/store', [TestiController::class, 'store'])->name('testi.store');
+Route::get('/testimoni', [TestimoniController::class, 'index'])->name('admin.testi');
 
-// Menmpilkan Sound System
-Route::get('/testimoni/show/{id}', [TestiController::class, 'show'])->name('testi.show');
-Route::get('/testimoni/edit/{id}', [TestiController::class, 'edit'])->name('testi.edit');
-Route::put('/testimoni/update/{id}', [TestiController::class, 'update'])->name('testi.update');
+// Testi
+Route::get('/testi', [TestiController::class, 'index'])->name('testi.index');
+Route::get('/testi/{id}', [TestiController::class, 'show'])->name('testi.show');
+Route::get('/testi/create', [TestiController::class, 'create'])->name('testi.create');
+Route::post('/testi/store', [TestiController::class, 'store'])->name('testi.store');
+Route::get('/testi/edit/{id}', [TestiController::class, 'edit'])->name('testi.edit');
+Route::put('/testi/update/{id}', [TestiController::class, 'update'])->name('testi.update');
+Route::delete('/testi/{id}', [TestiController::class, 'destroy'])->name('testi.destroy');
 
-// Login Admin
+// Authentication Routes
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-// Register Admin
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
+Route::post('/logout-admin', [AuthController::class, 'logoutAdmin'])->name('logout-admin');
+Route::post('/logout-user', [AuthController::class, 'logoutUser'])->name('logout-user');
 
-Route::get('/home', [HomeController::class, 'home'])->name('home');
-Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/profil', [HomeController::class, 'profil'])->name('profil');
-//Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
+Route::get('/profil', [AdminController::class, 'profil'])->name('admin.profil');
+Route::get('/edit-profil', [AdminController::class, 'edit'])->name('admin.edit_profil');
+Route::patch('/update-profile', [AdminController::class, 'updateProfile'])->name('admin.updateProfile');
+
+Route::middleware('auth:admin')->group(function () {
+    // Rute yang memerlukan autentikasi admin
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+});
+
+Route::get('/akun', [UserController::class, 'profil'])->name('pages.profil');
+Route::get('/edit-akun', [UserController::class, 'edit'])->name('pages.edit_profil');
+Route::patch('/update-akun', [UserController::class, 'updateProfile'])->name('pages.updateProfile');
+
+Route::middleware('auth:web')->group(function () {
+    // Rute yang memerlukan autentikasi user
+    Route::get('/index', function () {
+        return view('pages.index');
+    })->name('index');
+
+});

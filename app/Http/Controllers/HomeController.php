@@ -25,9 +25,9 @@ class HomeController extends Controller
     public function home()
     {
         // Jika ingin mengambil informasi pengguna yang sedang login
-        $user = auth()->user();
+        $admins = auth()->user();
 
         // Tampilkan halaman home dengan data pengguna
-        return view('admin.home')->with('user', $user);
+        return view('admin.home')->with('admins', $admins);
     }
 }

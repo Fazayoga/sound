@@ -2,27 +2,48 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class Admin extends Model implements Authenticatable
+class Admin extends Authenticatable implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
-    use HasFactory, Notifiable, AuthenticatableTrait;
+    use HasFactory, Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'user_type',
     ];
 
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
     ];
 
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    protected $primaryKey = 'id'; // Adjust based on your primary key column name
 
-    protected $table = 'admins';
+    public function getAuthPassword()
+    {
+        return $this->password;
+    }
+
+    // Customize credentials validation if needed
+    public function validateCredentials($credentials)
+    {
+        return $this->password === $credentials['password'];
+    }
+
+    public function saveProfile($name, $email, $password = null)
+    {
+        $this->name = $name;
+        $this->email = $email;
+
+        if ($password !== null) {
+            $this->password = Hash::make($password);
+        }
+
+        return $this->save();
+    }
 }
