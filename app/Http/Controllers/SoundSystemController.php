@@ -25,7 +25,6 @@ class SoundSystemController extends Controller
         return view('admin.create');
     }
 
-    
     public function store(Request $request)
     {
         // Validasi data

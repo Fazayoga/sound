@@ -6,10 +6,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\TestiController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\RentalController;
-use App\Http\Controllers\TestimoniController;
 use App\Http\Controllers\SoundSystemController;
 
 Route::get('/', function () {
@@ -46,22 +44,7 @@ Route::post('/sound_systems/store', [SoundSystemController::class, 'store'])->na
 Route::get('/sound_systems/show/{id}', [SoundSystemController::class, 'show'])->name('admin.show');
 Route::get('/sound_systems/edit/{id}', [SoundSystemController::class, 'edit'])->name('admin.edit');
 Route::put('/sound_systems/update/{id}', [SoundSystemController::class, 'update'])->name('admin.update');
-
-// Admin Routes
 Route::resource('admin', SoundSystemController::class)->except('show');
-Route::get('/admin/testimoni', [TestimoniController::class, 'index'])->name('admin.testi');
-
-// Testimoni
-Route::get('/testimoni', [TestimoniController::class, 'index'])->name('admin.testi');
-
-// Testi
-Route::get('/testi', [TestiController::class, 'index'])->name('testi.index');
-Route::get('/testi/{id}', [TestiController::class, 'show'])->name('testi.show');
-Route::get('/testi/create', [TestiController::class, 'create'])->name('testi.create');
-Route::post('/testi/store', [TestiController::class, 'store'])->name('testi.store');
-Route::get('/testi/edit/{id}', [TestiController::class, 'edit'])->name('testi.edit');
-Route::put('/testi/update/{id}', [TestiController::class, 'update'])->name('testi.update');
-Route::delete('/testi/{id}', [TestiController::class, 'destroy'])->name('testi.destroy');
 
 // Authentication Routes
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -90,5 +73,4 @@ Route::middleware('auth:web')->group(function () {
     Route::get('/index', function () {
         return view('pages.index');
     })->name('index');
-
 });
